@@ -44,6 +44,5 @@ test('basic test', async () => {
     await expect(page).toHaveURL('https://www.stream.cz/hledani?dotaz=Kazma');
     await expect(page.locator(".search-episodes__item")).toHaveCount(0)
   
-    
     //await context.tracing.stop({path:"trace.zip"})
 });
