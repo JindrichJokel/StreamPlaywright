@@ -2,10 +2,11 @@
 const { test, expect, chromium } = require('@playwright/test');
 
 test('TC1', async () => {
-   // await context.tracing.start({screenshots:true, snapshots: true}); 
+   
     const browser = await chromium.launch()
     const context = await browser.newContext();
     const page = await context.newPage();
+    await context.tracing.start({screenshots:true, snapshots: true}); 
     await context.addCookies( [
         {
             name: "euconsent-v2", // TCF string v2
@@ -43,5 +44,5 @@ test('TC1', async () => {
     await page.locator('[aria-label="Vyhledat"]').click();
     await expect(page).toHaveURL('https://www.stream.cz/hledani?dotaz=Kazma');
     await expect(page.locator('.search-episodes__item').first()).toBeVisible();
-    //await context.tracing.stop({path:"trace.zip"})
+    await context.tracing.stop({path:"trace.zip"})
 });
