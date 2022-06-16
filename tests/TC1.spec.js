@@ -1,7 +1,7 @@
 
 const { test, expect, chromium } = require('@playwright/test');
 
-test('TC1 kazma search bar', async () => {
+test('TC1', async () => {
    // await context.tracing.start({screenshots:true, snapshots: true}); 
     const browser = await chromium.launch()
     const context = await browser.newContext();
@@ -42,7 +42,6 @@ test('TC1 kazma search bar', async () => {
     await page.locator('[placeholder="Zadejte\\, co chcete hledat"]').fill('Kazma');
     await page.locator('[aria-label="Vyhledat"]').click();
     await expect(page).toHaveURL('https://www.stream.cz/hledani?dotaz=Kazma');
-    await expect(page.locator(".search-episodes__item")).toHaveCount(0)
-  
+    await expect(page.locator('.search-episodes__item').first()).toBeVisible();
     //await context.tracing.stop({path:"trace.zip"})
 });
