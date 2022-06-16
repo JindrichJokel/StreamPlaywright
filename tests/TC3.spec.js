@@ -1,7 +1,7 @@
 
 const { test, expect, chromium } = require('@playwright/test');
 
-test('TC2', async () => {
+test('TC3', async () => {
   
     const browser = await chromium.launch()
     const context = await browser.newContext();
@@ -39,13 +39,10 @@ test('TC2', async () => {
             httpOnly: false,
         }
     ]);
-    await page.goto('https://www.stream.cz/');
-    await page.locator('[placeholder="Zadejte\\, co chcete hledat"]').fill('fewfwefwefwefwe');
-    await page.locator('[aria-label="Vyhledat"]').click();
-    await expect(page).toHaveURL('https://www.stream.cz/hledani?dotaz=fewfwefwefwefwe');
+    await page.goto('https://www.stream.cz/hledani');
    const text1 = await page.innerText(".h.h--search-empty");
-   await expect(text1).toBe("Bohužel jsme nic nenašli.");
-  
+   await expect(text1).toBe("Zadejte, co chcete hledat");
+   await expect(page.locator('.search-episodes__item').first()).toBeHidden();
    
    // await context.tracing.stop({path:"trace.zip"})
  
